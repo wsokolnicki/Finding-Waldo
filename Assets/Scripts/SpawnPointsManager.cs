@@ -11,28 +11,28 @@ public class SpawnPointsManager : MonoBehaviour
     [SerializeField] GameObject spawnPointPrefab;
 
     [Header("Pedestrian Density")]
-    [SerializeField] [Range(0.5f, 3)] float distanceBetweenPeople = 0.7f;
+    [SerializeField] [Range(0.5f, 3)] public float distanceBetweenPeople = 0.7f;
     float minDistance = 0.5f;
 
     [Header("Pedestrian Area")]
     [SerializeField] public int area = 20;
 
-
     Vector3 playerPosition;
-    [HideInInspector] public List<GameObject> pedestrianList;
-
+    int randomX;
+    int randomY;
 
     private void Awake()
     {
         playerPosition = FindObjectOfType<Player>().transform.position;
     }
 
-    void Start()
+    private void Start()
     {
-        GenerateSpawnPoints();
+        randomX = Random.Range(-area, area);
+        randomY = Random.Range(-area, area);
     }
 
-    private void GenerateSpawnPoints()
+    public void GenerateSpawnPoints()
     {
         for(int x = -area; x < area; x++)
         {
@@ -45,6 +45,13 @@ public class SpawnPointsManager : MonoBehaviour
                     Instantiate(spawnPointPrefab, spawnPoint, Quaternion.identity);
 
                 spawnPointGO.transform.SetParent(gameObject.transform);
+
+                if (x == randomX && y == randomY)
+                {
+                    spawnPointGO.GetComponent<PedestrianManager>().isWaldo = true;
+                    FindObjectOfType<ArrowPointer>().GetComponent<ArrowPointer>().waldoPosition
+                        = spawnPoint;
+                }
             }
         }
     }

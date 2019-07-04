@@ -5,12 +5,17 @@ using UnityEngine;
 public class PedestrianManager : MonoBehaviour
 {
     [SerializeField] GameObject pedestrianPrefab;
+    [SerializeField] GameObject waldoPrefab;
+    [HideInInspector] public bool isWaldo;
 
     public void InstantiatePedestrian(GameObject spawnPointGO, Vector2 spawnPoint)
     {
-        GameObject pedestrian =
-        Instantiate(pedestrianPrefab, spawnPoint, Quaternion.identity);
-        pedestrian.transform.SetParent(spawnPointGO.transform);
+        if (isWaldo)
+            pedestrianPrefab = waldoPrefab;
+
+            GameObject pedestrian =
+          Instantiate(pedestrianPrefab, spawnPoint, Quaternion.identity);
+            pedestrian.transform.SetParent(spawnPointGO.transform);
     }
 
     private void Update()
@@ -21,6 +26,7 @@ public class PedestrianManager : MonoBehaviour
     private void PedetriansVisibility()
     {
         Vector2 viewPosition = Camera.main.WorldToViewportPoint(gameObject.transform.position);
+
         if (viewPosition.x < -0.15f || viewPosition.x > 1.15f || viewPosition.y < -0.15f || viewPosition.y > 1.15f)
         {
             if (transform.childCount == 0)

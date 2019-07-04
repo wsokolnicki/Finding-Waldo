@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] float movementSpeed = 1f;
+    [SerializeField] public float movementSpeed = 1f;
     Animator animator;
 
     private void Start()
@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
         if (deltaX != 0 || deltaY != 0)
         {
             animator.SetBool("isRunning", true);
-            transform.localScale = new Vector3(-Mathf.Sign(deltaX), 1f, 1f);
+            transform.GetChild(0).localScale = new Vector3(-Mathf.Sign(deltaX), 1f, 1f);
         }
         else
             animator.SetBool("isRunning", false);

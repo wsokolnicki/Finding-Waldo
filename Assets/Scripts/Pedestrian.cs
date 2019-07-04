@@ -5,9 +5,9 @@ using UnityEngine;
 public class Pedestrian : MonoBehaviour
 {
     Animator animator;
-    float speed = 3f;
-    public bool isRunning = false;
-    public bool standingStill = true;
+    float speed;
+    public bool isRunning = true;
+    public bool standingStill = false;
     Vector3 startPosition;
     GameObject mainPlayer;
     Camera cam;
@@ -15,11 +15,11 @@ public class Pedestrian : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        startPosition = transform.position;
         cam = Camera.main;
+        startPosition = transform.position;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (standingStill)
         {
@@ -53,14 +53,16 @@ public class Pedestrian : MonoBehaviour
     {
         if (player.gameObject.tag == "Player")
         {
+
             mainPlayer = player.gameObject;
+            speed = mainPlayer.GetComponent<Player>().movementSpeed * 1.5f;
             standingStill = false;
             isRunning = true;
         }
-        else if (player.gameObject.tag == "PedestrianController")
-        {
-            standingStill = true;
-        }
+        //else if (player.gameObject.tag == "PedestrianController")
+        //{
+        //    standingStill = true;
+        //}
     }
 
     private void OnTriggerExit2D(Collider2D player)
