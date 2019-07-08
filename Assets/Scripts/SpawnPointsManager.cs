@@ -26,16 +26,13 @@ public class SpawnPointsManager : MonoBehaviour
         playerPosition = FindObjectOfType<Player>().transform.position;
     }
 
-    private void Start()
-    {
-        randomX = Random.Range(-area, area);
-        randomY = Random.Range(-area, area);
-    }
-
     public void GenerateSpawnPoints()
     {
         for(int x = -area; x < area; x++)
         {
+            randomX = Random.Range(-area, area);
+            randomY = Random.Range(-area, area);
+
             for (int y = -area; y < area; y++)
             {
                 Vector2 spawnPoint =  new Vector2

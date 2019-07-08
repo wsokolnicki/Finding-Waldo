@@ -36,7 +36,7 @@ public class GameSetup : MonoBehaviour
         }
 
         if (Input.GetKeyUp(KeyCode.F))
-            EnableCheat();
+            Enable_DisableCheat(true);
 
         crowdSizeValue.text = crowdSizeSlider.value.ToString();
         playerSpeedValue.text = playerSpeedSlider.value.ToString();
@@ -60,10 +60,11 @@ public class GameSetup : MonoBehaviour
         canvasWithButtons.gameObject.SetActive(true);
         gameplay = false;
         FindObjectOfType<Player>().gameObject.transform.position = Vector2.zero;
+        Enable_DisableCheat(false);
     }
 
-    void EnableCheat()
+    void Enable_DisableCheat(bool activate)
     {
-        FindObjectOfType<Player>().transform.GetChild(4).GetChild(0).gameObject.SetActive(true);
+        FindObjectOfType<Player>().transform.GetChild(4).GetChild(0).gameObject.SetActive(activate);
     }
 }
