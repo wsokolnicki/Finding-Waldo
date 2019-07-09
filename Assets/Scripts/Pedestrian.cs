@@ -8,18 +8,29 @@ public class Pedestrian : MonoBehaviour
     float speed;
     public bool isRunning = true;
     public bool standingStill = false;
+    public bool explosion = false;
     Vector3 startPosition;
     GameObject mainPlayer;
     Camera cam;
+
+    Rigidbody2D rigidBody;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         cam = Camera.main;
         startPosition = transform.position;
+        rigidBody = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
+    {
+        if (explosion)
+             return;
+        PedestrianMovement();
+    }
+
+    private void PedestrianMovement()
     {
         if (standingStill)
         {
@@ -48,26 +59,35 @@ public class Pedestrian : MonoBehaviour
         }
     }
 
+    void Explosion(Vector3 waldoPosition)
+    {
+        animator.SetBool("boom", true);
+        Vector3 fallDirection = (transform.position - waldoPosition).normalized;
+        rigidBody.AddForce(fallDirection * 20f, ForceMode2D.Impulse);
+        rigidBody.drag = 5f;
+    }
 
     private void OnTriggerEnter2D(Collider2D player)
     {
-        if (player.gameObject.tag == "Player")
+        if (player.gameObject.tag == "Waldo")
         {
+            explosion = true;
+            gameObject.transform.parent.GetComponent<PedestrianManager>().removed = true;
+            Vector3 waldoPosition = player.transform.position;
+            Explosion(waldoPosition);
+        }
 
+        else if (player.gameObject.tag == "Player")
+        {
             mainPlayer = player.gameObject;
             speed = mainPlayer.GetComponent<Player>().movementSpeed * 1.5f;
             standingStill = false;
             isRunning = true;
         }
-        //else if (player.gameObject.tag == "PedestrianController")
-        //{
-        //    standingStill = true;
-        //}
     }
 
     private void OnTriggerExit2D(Collider2D player)
     {
-
         if (player.gameObject.tag == "Player")
         {
             isRunning = false;

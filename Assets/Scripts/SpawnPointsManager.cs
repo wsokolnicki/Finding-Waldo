@@ -28,11 +28,11 @@ public class SpawnPointsManager : MonoBehaviour
 
     public void GenerateSpawnPoints()
     {
-        for(int x = -area; x < area; x++)
-        {
-            randomX = Random.Range(-area, area);
-            randomY = Random.Range(-area, area);
+        randomX = Random.Range(-area, area);
+        randomY = Random.Range(-area, area);
 
+        for (int x = -area; x < area; x++)
+        {
             for (int y = -area; y < area; y++)
             {
                 Vector2 spawnPoint =  new Vector2
@@ -46,6 +46,7 @@ public class SpawnPointsManager : MonoBehaviour
                 if (x == randomX && y == randomY)
                 {
                     spawnPointGO.GetComponent<PedestrianManager>().isWaldo = true;
+                    spawnPointGO.name = "Waldo Spawn Point- xxxxxxxxxxxxxx";
                     FindObjectOfType<ArrowPointer>().GetComponent<ArrowPointer>().waldoPosition
                         = spawnPoint;
                 }

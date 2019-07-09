@@ -14,10 +14,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        MovingPlayer();
+        PlayerMovement();
     }
 
-    void MovingPlayer()
+    void PlayerMovement()
     {
         float deltaX = Input.GetAxis("Horizontal") * movementSpeed * Time.deltaTime;
         float deltaY = Input.GetAxis("Vertical") * movementSpeed * Time.deltaTime;
@@ -25,7 +25,8 @@ public class Player : MonoBehaviour
         if (deltaX != 0 || deltaY != 0)
         {
             animator.SetBool("isRunning", true);
-            transform.GetChild(0).localScale = new Vector3(-Mathf.Sign(deltaX), 1f, 1f);
+            for(int i=0; i<3; i++)
+            { transform.GetChild(i).localScale = new Vector3(-Mathf.Sign(deltaX), 1f, 1f); }       
         }
         else
             animator.SetBool("isRunning", false);

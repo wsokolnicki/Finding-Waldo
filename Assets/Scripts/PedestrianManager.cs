@@ -7,6 +7,7 @@ public class PedestrianManager : MonoBehaviour
     [SerializeField] GameObject pedestrianPrefab;
     [SerializeField] GameObject waldoPrefab;
     [HideInInspector] public bool isWaldo;
+    [HideInInspector] public bool removed = false;
 
     public void InstantiatePedestrian(GameObject spawnPointGO, Vector2 spawnPoint)
     {
@@ -36,7 +37,7 @@ public class PedestrianManager : MonoBehaviour
         }
         else
         {
-            if (gameObject.transform.childCount > 0)
+            if (gameObject.transform.childCount > 0 || removed)
                 return;
             else
                 InstantiatePedestrian(gameObject, gameObject.transform.position);
