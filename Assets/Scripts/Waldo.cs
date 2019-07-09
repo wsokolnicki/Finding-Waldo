@@ -24,13 +24,15 @@ public class Waldo : MonoBehaviour
 
     IEnumerator DisableAndAcitvatePlayer(Collider2D player)
     {
+        GameSetup gamesetup = FindObjectOfType<GameSetup>();
+
         player.enabled = false;
         player.gameObject.transform.GetChild(4).GetComponent<CircleCollider2D>().enabled = false;
         GetComponent<CircleCollider2D>().isTrigger = false;
         GetComponent<CircleCollider2D>().radius = 5f;
-        yield return new WaitForSeconds(0.5f);
-        //player.enabled = true;
-        //player.gameObject.transform.GetChild(4).GetComponent<CircleCollider2D>().enabled = true;
-
+        yield return new WaitForSeconds(2f);
+        gamesetup.gameplay = false;
+        gamesetup.GoBack();
+        gamesetup.timeUI.SetActive(true);
     }
 }

@@ -6,6 +6,8 @@ public class Pedestrian : MonoBehaviour
 {
     Animator animator;
     float speed;
+    int explosionForce = 15;
+    int explosionDrag = 5;
     public bool isRunning = true;
     public bool standingStill = false;
     public bool explosion = false;
@@ -61,10 +63,17 @@ public class Pedestrian : MonoBehaviour
 
     void Explosion(Vector3 waldoPosition)
     {
-        animator.SetBool("boom", true);
+        if (transform.position.x < waldoPosition.x)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+            animator.SetBool("boomLeft", true);
+        }
+        else
+            animator.SetBool("boomRight", true);
+
         Vector3 fallDirection = (transform.position - waldoPosition).normalized;
-        rigidBody.AddForce(fallDirection * 20f, ForceMode2D.Impulse);
-        rigidBody.drag = 5f;
+        rigidBody.AddForce(fallDirection * explosionForce, ForceMode2D.Impulse);
+        rigidBody.drag = explosionDrag;
     }
 
     private void OnTriggerEnter2D(Collider2D player)

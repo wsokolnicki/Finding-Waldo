@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#pragma warning disable 0649
 
 public class PedestrianManager : MonoBehaviour
 {
@@ -39,8 +40,10 @@ public class PedestrianManager : MonoBehaviour
         {
             if (gameObject.transform.childCount > 0 || removed)
                 return;
-            else
+            else 
                 InstantiatePedestrian(gameObject, gameObject.transform.position);
         }
     }
 }
+
+#pragma warning restore 0649

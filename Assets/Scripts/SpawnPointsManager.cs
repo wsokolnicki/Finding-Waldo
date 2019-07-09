@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+#pragma warning disable 0649
 
 public class SpawnPointsManager : MonoBehaviour
 {
@@ -35,6 +36,9 @@ public class SpawnPointsManager : MonoBehaviour
         {
             for (int y = -area; y < area; y++)
             {
+                if (x == 0 && y == 0)
+                    continue;
+
                 Vector2 spawnPoint =  new Vector2
                     (x * Random.Range(minDistance, distanceBetweenPeople), 
                     y * Random.Range(-minDistance, -distanceBetweenPeople));
@@ -54,3 +58,5 @@ public class SpawnPointsManager : MonoBehaviour
         }
     }
 }
+
+#pragma warning restore 0649

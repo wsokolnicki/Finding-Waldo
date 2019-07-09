@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+#pragma warning disable 0649
 
 public class GameSetup : MonoBehaviour
 {
@@ -15,15 +16,19 @@ public class GameSetup : MonoBehaviour
     [SerializeField] Text playerSpeedValue;
 
     [SerializeField] Canvas canvasWithButtons;
+
+    [SerializeField] Text timeText;
  
     [Header("Scripts Cache")]
     [SerializeField] Player player;
     [SerializeField] SpawnPointsManager crowd;
+    [SerializeField] public GameObject timeUI;
 
     [Header("")]
     [SerializeField] Transform pedestrians;
 
-    bool gameplay = false;
+    public float time;
+    public bool gameplay = false;
 
     private void Update()
     {
@@ -44,6 +49,11 @@ public class GameSetup : MonoBehaviour
         crowd.distanceBetweenPeople = crowdDensitySlider.value;
         crowd.area = (int)crowdSizeSlider.value;
         player.movementSpeed = playerSpeedSlider.value;
+
+        if (gameplay)
+            time += Time.deltaTime;
+
+        timeText.text = time.ToString("f2");
     }
 
     public void StartButton()
@@ -54,8 +64,7 @@ public class GameSetup : MonoBehaviour
         player.transform.GetChild(4).GetComponent<CircleCollider2D>().enabled = true;
         gameplay = true;
     }
-
-    void GoBack()
+    public void GoBack()
     {
         for (int i = 0; i < pedestrians.childCount; i++)
             Destroy(pedestrians.GetChild(i).gameObject);
@@ -70,3 +79,5 @@ public class GameSetup : MonoBehaviour
         FindObjectOfType<Player>().transform.GetChild(6).GetChild(0).gameObject.SetActive(activated);
     }
 }
+
+#pragma warning restore 0649

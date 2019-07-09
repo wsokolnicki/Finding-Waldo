@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#pragma warning disable 0649
 
 public class ArrowPointer : MonoBehaviour
 {
@@ -17,3 +18,5 @@ public class ArrowPointer : MonoBehaviour
         arrow.eulerAngles = new Vector3(0, 0, plusOrMinus * angle);
     }
 }
+
+#pragma warning restore 0649
