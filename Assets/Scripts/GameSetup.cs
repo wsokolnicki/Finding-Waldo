@@ -63,6 +63,7 @@ public class GameSetup : MonoBehaviour
         player.gameObject.GetComponent<CircleCollider2D>().enabled = true;
         player.transform.GetChild(4).GetComponent<CircleCollider2D>().enabled = true;
         gameplay = true;
+        time = 0;
     }
     public void GoBack()
     {

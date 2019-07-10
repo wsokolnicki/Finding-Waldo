@@ -1,21 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#pragma warning disable 0649
 
 public class Pedestrian : MonoBehaviour
 {
+    Camera cam;
     Animator animator;
-    float speed;
-    int explosionForce = 15;
-    int explosionDrag = 5;
-    public bool isRunning = true;
-    public bool standingStill = false;
-    public bool explosion = false;
+    Rigidbody2D rigidBody;
     Vector3 startPosition;
     GameObject mainPlayer;
-    Camera cam;
 
-    Rigidbody2D rigidBody;
+    [Header("Sprites for pedestrian")]
+    [SerializeField] Sprite[] hats;
+    [SerializeField] Sprite[] bodies;
+    [SerializeField] Sprite[] legs;
+
+    [Header("Pedestrian bodyparts")]
+    [SerializeField] SpriteRenderer hat;
+    [SerializeField] SpriteRenderer body;
+    [SerializeField] SpriteRenderer leg;
+    [SerializeField] SpriteRenderer leg2;
+
+    float speed;
+    int explosionDrag = 5;
+    int explosionForce = 15;
+
+    public bool isRunning = true;
+    public bool explosion = false;
+    public bool standingStill = false;
 
     private void Start()
     {
@@ -23,6 +36,19 @@ public class Pedestrian : MonoBehaviour
         cam = Camera.main;
         startPosition = transform.position;
         rigidBody = GetComponent<Rigidbody2D>();
+        SetPedestrianLook();
+    }
+
+    void SetPedestrianLook()
+    {
+        int whichHat = Random.Range(0, hats.Length);
+        int whichBody = Random.Range(0, bodies.Length);
+        int whichLeg = Random.Range(0, legs.Length);
+
+        hat.sprite = hats[whichHat];
+        body.sprite = bodies[whichBody];
+        leg.sprite = legs[whichLeg];
+        leg2.sprite = legs[whichLeg];
     }
 
     private void FixedUpdate()
@@ -108,3 +134,5 @@ public class Pedestrian : MonoBehaviour
         }
     }
 }
+
+#pragma warning restore 0649

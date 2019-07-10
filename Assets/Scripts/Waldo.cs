@@ -31,8 +31,8 @@ public class Waldo : MonoBehaviour
         GetComponent<CircleCollider2D>().isTrigger = false;
         GetComponent<CircleCollider2D>().radius = 5f;
         yield return new WaitForSeconds(2f);
-        gamesetup.gameplay = false;
-        gamesetup.GoBack();
-        gamesetup.timeUI.SetActive(true);
+        //gamesetup.gameplay = false;
+        //gamesetup.GoBack();
+        //gamesetup.timeUI.SetActive(true);
     }
 }
