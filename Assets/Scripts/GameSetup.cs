@@ -61,7 +61,7 @@ public class GameSetup : MonoBehaviour
         crowd.GenerateSpawnPoints();
         canvasWithButtons.gameObject.SetActive(false);
         player.gameObject.GetComponent<CircleCollider2D>().enabled = true;
-        player.transform.GetChild(4).GetComponent<CircleCollider2D>().enabled = true;
+        player.transform.GetChild(3).GetComponent<CircleCollider2D>().enabled = true;
         gameplay = true;
         time = 0;
     }
@@ -77,7 +77,8 @@ public class GameSetup : MonoBehaviour
 
     void Enable_DisableCheat(bool activated)
     {
-        FindObjectOfType<Player>().transform.GetChild(6).GetChild(0).gameObject.SetActive(activated);
+        FindObjectOfType<Player>().transform.GetChild(4)
+            .GetChild(0).gameObject.SetActive(activated);
     }
 }
 

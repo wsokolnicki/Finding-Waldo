@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 #pragma warning disable 0649
 
-public class Pedestrian : MonoBehaviour
+public class Pedestrian : LayerOrder
 {
     Camera cam;
     Animator animator;
@@ -22,7 +22,10 @@ public class Pedestrian : MonoBehaviour
     [SerializeField] SpriteRenderer leg;
     [SerializeField] SpriteRenderer leg2;
 
-    float speed;
+    SpriteRenderer[] bodyParts;
+
+    float walkAwaySpeed;
+    int goBackSpeed = 5;
     int explosionDrag = 5;
     int explosionForce = 15;
 
@@ -36,6 +39,7 @@ public class Pedestrian : MonoBehaviour
         cam = Camera.main;
         startPosition = transform.position;
         rigidBody = GetComponent<Rigidbody2D>();
+        bodyParts = new SpriteRenderer[] { hat, body, leg, leg2 };
         SetPedestrianLook();
     }
 
@@ -51,10 +55,12 @@ public class Pedestrian : MonoBehaviour
         leg2.sprite = legs[whichLeg];
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
+        LayerOrdering(bodyParts);
+
         if (explosion)
-             return;
+            return;
         PedestrianMovement();
     }
 
@@ -70,7 +76,7 @@ public class Pedestrian : MonoBehaviour
         {
             animator.SetBool("isRunning", true);
             transform.position =
-                Vector2.MoveTowards(transform.position, startPosition, speed * Time.deltaTime);
+                Vector2.MoveTowards(transform.position, startPosition, goBackSpeed * Time.deltaTime);
 
             transform.localScale = new Vector3
                 (Mathf.Sign((transform.position - startPosition).normalized.x), 1f, 1f);
@@ -83,7 +89,7 @@ public class Pedestrian : MonoBehaviour
             Vector2 moveDirection = transform.position - mainPlayer.transform.position;
             transform.localScale = new Vector3
                 (-Mathf.Sign((moveDirection).normalized.x), 1f, 1f);
-            transform.Translate(moveDirection * speed * Time.deltaTime);
+            transform.Translate(moveDirection * walkAwaySpeed * Time.deltaTime);
         }
     }
 
@@ -115,7 +121,7 @@ public class Pedestrian : MonoBehaviour
         else if (player.gameObject.tag == "Player")
         {
             mainPlayer = player.gameObject;
-            speed = mainPlayer.GetComponent<Player>().movementSpeed * 1.5f;
+            walkAwaySpeed = mainPlayer.GetComponent<Player>().movementSpeed * 1.25f;
             standingStill = false;
             isRunning = true;
         }

@@ -10,6 +10,11 @@ public class PedestrianManager : MonoBehaviour
     [HideInInspector] public bool isWaldo;
     [HideInInspector] public bool removed = false;
 
+    Vector2 viewPosition;
+    Vector2 viewPositionPedestrian;
+    float minBoundary = -0.15f;
+    float maxBoundary = 1.15f;
+
     public void InstantiatePedestrian(GameObject spawnPointGO, Vector2 spawnPoint)
     {
         if (isWaldo)
@@ -27,9 +32,10 @@ public class PedestrianManager : MonoBehaviour
 
     private void PedetriansVisibility()
     {
-        Vector2 viewPosition = Camera.main.WorldToViewportPoint(gameObject.transform.position);
+        viewPosition = Camera.main.WorldToViewportPoint(gameObject.transform.position);
 
-        if (viewPosition.x < -0.15f || viewPosition.x > 1.15f || viewPosition.y < -0.15f || viewPosition.y > 1.15f)
+        if ((viewPosition.x < minBoundary || viewPosition.x > maxBoundary
+            || viewPosition.y < minBoundary || viewPosition.y > maxBoundary))
         {
             if (transform.childCount == 0)
                 return;

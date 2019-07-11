@@ -2728,11 +2728,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1375270387440632399, guid: f1a1d12ad7376a2439f9de21dd4ac459,
-        type: 3}
-      propertyPath: movementSpeed
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4210157123753652, guid: f1a1d12ad7376a2439f9de21dd4ac459, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2743,7 +2738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4210157123753652, guid: f1a1d12ad7376a2439f9de21dd4ac459, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4210157123753652, guid: f1a1d12ad7376a2439f9de21dd4ac459, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2776,38 +2771,6 @@ PrefabInstance:
     - target: {fileID: 4210157123753652, guid: f1a1d12ad7376a2439f9de21dd4ac459, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8631321383011503159, guid: f1a1d12ad7376a2439f9de21dd4ac459,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8631321383011503159, guid: f1a1d12ad7376a2439f9de21dd4ac459,
-        type: 3}
-      propertyPath: m_Radius
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1854468890, guid: f1a1d12ad7376a2439f9de21dd4ac459, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4096975540831286, guid: f1a1d12ad7376a2439f9de21dd4ac459, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8528481228113254950, guid: f1a1d12ad7376a2439f9de21dd4ac459,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4236636489436240, guid: f1a1d12ad7376a2439f9de21dd4ac459, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5123303360351759128, guid: f1a1d12ad7376a2439f9de21dd4ac459,
-        type: 3}
-      propertyPath: m_Radius
-      value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1a1d12ad7376a2439f9de21dd4ac459, type: 3}
