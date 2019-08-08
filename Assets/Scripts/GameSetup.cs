@@ -28,6 +28,7 @@ public class GameSetup : MonoBehaviour
     [SerializeField] Transform pedestrians;
 
     public float time;
+    int timeAfterCheatOn = 60;
     public bool gameplay = false;
 
     private void Update()
@@ -51,8 +52,12 @@ public class GameSetup : MonoBehaviour
         player.movementSpeed = playerSpeedSlider.value;
 
         if (gameplay)
+        {
             time += Time.deltaTime;
-
+            if (time >= timeAfterCheatOn)
+                Enable_DisableCheat(true);
+        }
+        
         timeText.text = time.ToString("f2");
     }
 
